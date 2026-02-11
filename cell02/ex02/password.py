@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 password = "I Love 42"
 user_input = input()
 
