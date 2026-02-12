@@ -47,6 +47,45 @@ R.P.
 """
     checkmate(board5)
 
+    print("=== Test 6: squre ===")
+    board6 = """\
+R.P...
+.K..
+....
+....\
+"""
+    checkmate(board6)
 
+    print("=== Test 7: king? ===")
+    board7 = """\
+R.P.
+....
+....
+....\
+"""
+    checkmate(board7)
+
+
+    print("=== Test 8: king?? ===")
+    board8 = """\
+R.P.
+.K..
+...k
+.k..\
+"""
+    checkmate(board8)
+
+
+    print("=== Test 9: Nearest  ===")
+    board9 = """\
+R.P....
+.K...R.
+.......
+.q.B...
+.......
+.......
+.......\
+"""
+    checkmate(board9)
 if __name__ == "__main__":
     main()
