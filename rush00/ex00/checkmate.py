@@ -97,6 +97,6 @@ def checkmate(board_text: str):
     )
     if attacker:
          print(f"Success checkmate by {piece_names[attacker]}")
-    return
+         return
 
     print("Fail")
