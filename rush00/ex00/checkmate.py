@@ -35,7 +35,7 @@ def checkmate(board_text: str):
         return
 
     if len(king_positions) > 1:
-        print("How did you manage to have more than one King?")
+        print("How did you have more than one King?")
         return
 
     king_row, king_col = king_positions[0]
