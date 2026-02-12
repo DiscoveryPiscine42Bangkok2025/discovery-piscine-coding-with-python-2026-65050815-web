@@ -59,7 +59,7 @@ def checkmate(board_text: str):
         pawn_col = king_col + col_offset
 
         if korb_board(pawn_row, pawn_col) and board_rows[pawn_row][pawn_col] == "P":
-            print("Success (P)")
+            print(f"Success checkmate by {piece_names['P']}")
             return
 
     # Scan (Rook / Bishop / Queen)
@@ -87,8 +87,8 @@ def checkmate(board_text: str):
         target_pieces="RQ"
     )
     if attacker:
-        print(f"Success ({attacker})")
-        return
+         print(f"Success checkmate by {piece_names[attacker]}")
+         return
 
     # Bishop / Queen X
     attacker = scan_directions(
@@ -96,7 +96,7 @@ def checkmate(board_text: str):
         target_pieces="BQ"
     )
     if attacker:
-        print(f"Success ({attacker})")
-        return
+         print(f"Success checkmate by {piece_names[attacker]}")
+    return
 
     print("Fail")
