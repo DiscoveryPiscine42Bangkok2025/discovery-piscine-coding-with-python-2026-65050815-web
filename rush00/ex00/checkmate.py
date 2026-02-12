@@ -42,11 +42,11 @@ def checkmate(board_text: str):
     
     #ชื่อหมากตอน checkmate
     piece_names = {
-    "P": "Pawn",
-    "R": "Rook",
-    "B": "Bishop",
-    "Q": "Queen"
-}
+        "P": "Pawn",
+        "R": "Rook",
+        "B": "Bishop",
+        "Q": "Queen"
+        }
 
 
     # ขอบกระดาน
