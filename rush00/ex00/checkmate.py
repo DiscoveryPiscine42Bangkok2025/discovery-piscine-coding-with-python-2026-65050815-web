@@ -1,15 +1,14 @@
 def checkmate(board_text: str):
-    #กระดาน
-    board_rows = [row.replace(" ","").upper() for row in board_text.splitlines()] # ใช้ตัวเล็กได้
+    # กระดาน
+    board_rows = [row.replace(" ", "").upper() for row in board_text.splitlines()]
     board_size = len(board_rows)
 
-
-    if any(len(row) != board_size for row in board_rows): #  Boardไม่เป็นจตุรัส
+    if any(len(row) != board_size for row in board_rows):
         print("Board must be square")
         return
-    
+
     # หมาก
-    allowed_pieces = set("KPRBQ.")  # กำหนดหมาก
+    allowed_pieces = set("KPRBQ.")
 
     cleaned_rows = []
     for row in board_rows:
@@ -18,41 +17,49 @@ def checkmate(board_text: str):
             if piece in allowed_pieces:
                 new_row += piece
             else:
-                new_row += "."   # ช่องว่างไม่มีหมาก
+                new_row += "."
         cleaned_rows.append(new_row)
 
     board_rows = cleaned_rows
 
-
     # ตำแหน่ง King
     king_positions = [
-        (row_index, col_index)
-        for row_index in range(board_size)
-        for col_index in range(board_size)
-        if board_rows[row_index][col_index] == "K"
+        (r, c)
+        for r in range(board_size)
+        for c in range(board_size)
+        if board_rows[r][c] == "K"
     ]
 
-    if len(king_positions) == 0: # <<< ไม่มี King 
+    if len(king_positions) == 0:
         print("Where is your King?")
         return
 
-    if len(king_positions) > 1: # <<< King มากกว่า 1 ตัว
+    if len(king_positions) > 1:
         print("How did you manage to have more than one King?")
         return
 
     king_row, king_col = king_positions[0]
+    
+    #ชื่อหมากตอน checkmate
+    piece_names = {
+    "P": "Pawn",
+    "R": "Rook",
+    "B": "Bishop",
+    "Q": "Queen"
+}
 
-    #ขอบกระดาน
+
+    # ขอบกระดาน
     def korb_board(row, col):
         return 0 <= row < board_size and 0 <= col < board_size
 
-    # Pawn attack อยู่ล่าง ยิงขึ้น \/
+    # pawn
     for col_offset in (-1, 1):
         pawn_row = king_row + 1
         pawn_col = king_col + col_offset
 
         if korb_board(pawn_row, pawn_col) and board_rows[pawn_row][pawn_col] == "P":
-            print("Success")
+            print("Success (P)")
             return
 
     # Scan (Rook / Bishop / Queen)
@@ -66,30 +73,30 @@ def checkmate(board_text: str):
 
                 if piece != ".":
                     if piece in target_pieces:
-                        return True  
+                        return piece   
                     else:
-                        break            
-                            # เดินผ่านได้แค่ช่องว่าง
+                        break
+
                 scan_row += row_step
                 scan_col += col_step
 
-        return False
-
-
-        # Rook / Queen +
-    if scan_directions(
+        return None   
+    # Rook / Queen +
+    attacker = scan_directions(
         directions=[(-1,0),(1,0),(0,-1),(0,1)],
         target_pieces="RQ"
-    ):
-        print("Success")
+    )
+    if attacker:
+        print(f"Success ({attacker})")
         return
 
     # Bishop / Queen X
-    if scan_directions(
+    attacker = scan_directions(
         directions=[(-1,-1),(-1,1),(1,-1),(1,1)],
         target_pieces="BQ"
-    ):
-        print("Success")
+    )
+    if attacker:
+        print(f"Success ({attacker})")
         return
 
     print("Fail")
