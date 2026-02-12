@@ -1,3 +1,5 @@
 #!/usr/bin/env python3
-array = [2, 8, 9, 48, 8, 22, -12, 2]
+user_input = input("Please enter numbers separated by spaces: ")
+array = list(map(int, user_input.split()))
+
 print(array)
