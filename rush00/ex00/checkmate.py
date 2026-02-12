@@ -76,7 +76,7 @@ def checkmate(board_text: str):
                         return piece   
                     else:
                         break
-
+                            # ดูว่าโดนบังมั้ย
                 scan_row += row_step
                 scan_col += col_step
 
